@@ -1,0 +1,96 @@
+﻿<Window x:Class="GymMembershipSystem.View.AdminDashboard"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="clr-namespace:GymMembershipSystem.ViewModel"
+        Title="Admin Dashboard" Height="370" Width="550"
+        WindowStyle="None"
+        MouseLeftButtonDown="Window_MouseLeftButtonDown"
+        Background="{DynamicResource BackgroundBrush}" 
+        Foreground="{DynamicResource ForegroundBrush}"
+        FontFamily="{StaticResource DefaultFontFamily}">
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" 
+                   Text="Admin Dashboard" FontSize="20" FontWeight="Bold" 
+                   HorizontalAlignment="Center" Margin="0,0,0,20" 
+                   Background="{DynamicResource BackgroundBrush}" 
+                   Foreground="{DynamicResource ForegroundBrush}"
+                   FontFamily="{StaticResource DefaultFontFamily}"/>
+
+        <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Grid.Column="1" Height="25" Margin="0,0,0,20">
+            <Button Name="minimize" Width="50" Background="Transparent" BorderBrush="Transparent" Content="🗕" HorizontalAlignment="right" FontSize="15" Click="minimize_Click" 
+                Foreground="{DynamicResource ForegroundBrush}" FontFamily="{StaticResource DefaultFontFamily}"/>
+            <Button x:Name="maximize" Width="50" Background="Transparent" BorderBrush="Transparent" Content="🗖" HorizontalAlignment="right"  FontSize="15" Click="maximize_Click" 
+                Foreground="{DynamicResource ForegroundBrush}" FontFamily="{StaticResource DefaultFontFamily}"/>
+            <Button x:Name="close" Width="50" Background="Transparent" BorderBrush="Transparent" Content="X" HorizontalAlignment="right"  FontSize="15" Click="close_Click"  
+                Foreground="{DynamicResource ForegroundBrush}" FontFamily="{StaticResource DefaultFontFamily}"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,20,0,20">
+            <Button Content="Remove User" Width="110" Command="{Binding RemoveUserCommand}" Background="{DynamicResource BackgroundBrush}" 
+                Foreground="{DynamicResource ForegroundBrush}" FontFamily="{StaticResource DefaultFontFamily}"/>
+            <Button Content="Remove Membership Package" Width="180" Command="{Binding RemovePackageCommand}" Background="{DynamicResource BackgroundBrush}" 
+                Foreground="{DynamicResource ForegroundBrush}"/>
+            <Button Content="Read activity log" Width="110" Command="{Binding ViewActivityLogCommand}" Background="{DynamicResource BackgroundBrush}" 
+                Foreground="{DynamicResource ForegroundBrush}" FontFamily="{StaticResource DefaultFontFamily}"/>
+            <Button Content="View Statistics" Width="110" Command="{Binding ViewStatisticsCommand}" Background="{DynamicResource BackgroundBrush}" 
+                Foreground="{DynamicResource ForegroundBrush}" FontFamily="{StaticResource DefaultFontFamily}"/>
+        </StackPanel>
+
+
+        <GroupBox Header="Add New User" Grid.Row="3" Grid.Column="0" Margin="0,30,20,0">
+            <StackPanel Margin="10">
+                <TextBlock Text="Username:" Background="{DynamicResource BackgroundBrush}" 
+                Foreground="{DynamicResource ForegroundBrush}"/>
+                <TextBox Text="{Binding NewUser.Username, UpdateSourceTrigger=PropertyChanged}" Width="200" Background="{DynamicResource BackgroundBrush}" 
+                Foreground="{DynamicResource ForegroundBrush}"
+                FontFamily="{StaticResource DefaultFontFamily}"/>
+
+                <TextBlock Text="Password:" Margin="0,10,0,0" Background="{DynamicResource BackgroundBrush}" 
+                Foreground="{DynamicResource ForegroundBrush}"/>
+                <PasswordBox Width="200" x:Name="PasswordBox" PasswordChanged="PasswordBox_PasswordChanged" Background="{DynamicResource BackgroundBrush}" 
+                Foreground="{DynamicResource ForegroundBrush}"
+                FontFamily="{StaticResource DefaultFontFamily}"/>
+
+                <TextBlock Text="Role:" Margin="0,10,0,0" Background="{DynamicResource BackgroundBrush}" 
+                Foreground="{DynamicResource ForegroundBrush}"/>
+                <ComboBox SelectedItem="{Binding NewUser.Role}" Width="200" Background="{DynamicResource BackgroundBrush}" Foreground="{DynamicResource ForegroundBrush}">
+                    <ComboBoxItem Content="Admin" Background="{DynamicResource BackgroundBrush}" 
+                    Foreground="{DynamicResource ForegroundBrush}" FontFamily="{StaticResource DefaultFontFamily}"/>
+                    <ComboBoxItem Content="Employee" Background="{DynamicResource BackgroundBrush}" 
+                    Foreground="{DynamicResource ForegroundBrush}" FontFamily="{StaticResource DefaultFontFamily}"/>
+                </ComboBox>
+
+                <Button Content="Add User" Width="100" Margin="0,10,0,0" 
+                        HorizontalAlignment="Right" Command="{Binding AddUserCommand}"/>
+            </StackPanel>
+        </GroupBox>
+
+        <GroupBox Header="Add Membership Package" Grid.Row="3" Grid.Column="1" Margin="0,30,0,0">
+            <StackPanel Margin="10">
+                <TextBlock Text="Package Name:" Background="{DynamicResource BackgroundBrush}" Foreground="{DynamicResource ForegroundBrush}"/>
+                <TextBox Text="{Binding NewPackage.PackageName, UpdateSourceTrigger=PropertyChanged}" Width="200" Background="{DynamicResource BackgroundBrush}" Foreground="{DynamicResource ForegroundBrush}" FontFamily="{StaticResource DefaultFontFamily}"/>
+
+                <TextBlock Text="Duration (Months):" Margin="0,10,0,0" Background="{DynamicResource BackgroundBrush}" Foreground="{DynamicResource ForegroundBrush}"/>
+                <TextBox Text="{Binding NewPackage.DurationMonths, UpdateSourceTrigger=PropertyChanged}" Width="200" Background="{DynamicResource BackgroundBrush}" Foreground="{DynamicResource ForegroundBrush}" FontFamily="{StaticResource DefaultFontFamily}"/>
+
+                <TextBlock Text="Price:" Margin="0,10,0,0" Background="{DynamicResource BackgroundBrush}" Foreground="{DynamicResource ForegroundBrush}"/>
+                <TextBox Text="{Binding NewPackage.Price, UpdateSourceTrigger=PropertyChanged}" Width="200" Background="{DynamicResource BackgroundBrush}" Foreground="{DynamicResource ForegroundBrush}" FontFamily="{StaticResource DefaultFontFamily}"/>
+
+                <Button Content="Add Package" Width="150" Margin="0,10,0,0" 
+                        HorizontalAlignment="Right" Command="{Binding AddPackageCommand}"/>
+            </StackPanel>
+        </GroupBox>
+    </Grid>
+</Window>

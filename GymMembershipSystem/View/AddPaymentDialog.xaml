@@ -1,0 +1,24 @@
+﻿<Window x:Class="GymMembershipSystem.View.AddPaymentDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GymMembershipSystem.View"
+        mc:Ignorable="d"
+        Title="AddPaymentDialog" Height="250" Width="300">
+    <Grid Background="{DynamicResource BackgroundBrush}">
+        <StackPanel Background="{DynamicResource BackgroundBrush}">
+
+            <TextBlock Text="Select Membership Plan:" Height="20" Margin="60,30,0,25" Background="{DynamicResource BackgroundBrush}" Foreground="{DynamicResource ForegroundBrush}" FontFamily="{StaticResource DefaultFontFamily}"/>
+            
+            <ComboBox ItemsSource="{Binding MembershipPackages}" Height="20"
+            SelectedItem="{Binding SelectedMembershipPackage}" 
+            DisplayMemberPath="PackageName" 
+            Width="180" Margin="0,10" 
+            Background="{DynamicResource BackgroundBrush}" Foreground="{DynamicResource ForegroundBrush}" FontFamily="{StaticResource DefaultFontFamily}"/>
+
+            <Button x:Name="addPackage" Content="Add Package" Height="20" Width="90" Margin="0,20,0,0" Click="addPackage_Click" Background="{DynamicResource BackgroundBrush}" Foreground="{DynamicResource ForegroundBrush}"/>
+            
+    </StackPanel>
+    </Grid>
+</Window>
